@@ -17,11 +17,6 @@ export default function SearchSongEngine() {
         setSearchHistory([...searchHistory, songQuery]);
     }
 
-    const handleNextResults = (event) => {
-        event.preventDefault();
-        console.log("NEXT!");
-
-    }
     console.log("this is the search engine");
     return (
         <div className="searchEngineContanier">
@@ -30,8 +25,7 @@ export default function SearchSongEngine() {
                 <button type="submit" value="go"> go </button>
             </form>
 
-            {formSubmitted && <ResultList query={songQuery} viewMode={viewMode} />}
-            <button type='button' value="next results" onClick={(e) => { handleNextResults(e) }}>next results </button>
+            <ResultList query={songQuery} viewMode={viewMode} />
         </div>
     )
 }

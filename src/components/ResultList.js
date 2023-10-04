@@ -49,8 +49,6 @@ export default function ResultList({ query, viewMode }) {
                     }
                 });
 
-                // const response = await fetch('https://api.mixcloud.com/search/?q=adele&type=cloudcast');
-                //let data = await searchResponse.json();
                 console.log("the api fetched ", searchResponse);
                 setSearchResults(searchResponse.data.tracks.items);
                 setOffsetIteretor(offsetIteretor + LIMIT);
@@ -67,9 +65,16 @@ export default function ResultList({ query, viewMode }) {
             searchSong();
         }
 
-    }, [query, viewMode]
+    }, [query, offsetIteretor]
 
     );
+
+    
+    const handleNextResults = (event) => {
+        event.preventDefault();
+        console.log("NEXT!");
+        setOffsetIteretor(offsetIteretor + LIMIT);
+    }
 
     return (query &&
         <div className="results-list-container">
@@ -79,6 +84,8 @@ export default function ResultList({ query, viewMode }) {
                 if (viewMode === "list") return <ResultListItem name={result.name} />
                 else return <ResultTileItem name={result.name} />
             })}
+            
+            <button type='button' value="next results" onClick={(e) => { handleNextResults(e) }}>next results </button>
 
         </div>)
 }
